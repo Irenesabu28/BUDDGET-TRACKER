@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Transaction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+  <div class="container">
+    <h2>Add Transaction</h2>
+    <form id="transaction-form">
+      <input type="text" name="clothing_type" placeholder="Clothing Type" required />
+      <input type="number" name="quantity" placeholder="Quantity" required />
+      <input type="number" name="amount" placeholder="Amount" step="0.01" required />
+      <select name="transaction_type" required>
+        <option value="">Transaction Type</option>
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+      </select>
+      <select name="payment_method" required>
+        <option value="">Payment Method</option>
+        <option value="Cash">Cash</option>
+        <option value="Card">Card</option>
+        <option value="Online">Online</option>
+      </select>
+      <input type="text" name="mode_of_transaction" placeholder="Mode (optional)" />
+      <input type="text" name="category" placeholder="Category" required />
+      <button type="submit">Add Transaction</button>
+    </form>
+    <p id="message"></p>
+    <!-- Back to Home Button -->
+    <a href="{{ url_for('index') }}" class="action-button" style="margin-top: 20px; display: inline-block;">← Back to Home</a>
+  <script src="{{ url_for('static', filename='transaction.js') }}"></script>
+  </div>
+</body>
+</html>

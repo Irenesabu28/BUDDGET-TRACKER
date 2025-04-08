@@ -1,49 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Clothing Shop Manager</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Budget Tracker Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>🧥 Clothing Shop Manager</h1>
-    <form id="transactionForm">
-        <input name="clothing_type" placeholder="Clothing Type" required>
-        <input name="quantity" type="number" placeholder="Quantity" required>
-        <input name="amount" type="number" step="0.01" placeholder="Amount ₹" required>
-        <select name="transaction_type" required>
-            <option value="Credit">Credit</option>
-            <option value="Debit">Debit</option>
-        </select>
-        <select name="payment_method" required>
-            <option value="Cash">Cash</option>
-            <option value="Card">Card</option>
-            <option value="Online">Online</option>
-        </select>
-        <select name="mode_of_transaction">
-            <option value="">--Optional--</option>
-            <option>UPI</option><option>Wallet</option><option>NEFT</option>
-            <option>RTGS</option><option>IMPS</option><option>Google Pay</option>
-            <option>PhonePe</option><option>Paytm</option><option>Net Banking</option>
-        </select>
-        <input name="category" placeholder="Category" required>
-        <button type="submit">Add</button>
-    </form>
+  <div class="container home-container">
+    <h1>👕 Clothing Shop Manager </h1>
+    <p class="subtitle">Manage your shop & budget with ease!</p>
 
-    <div class="summary">
-        <p><strong>Income:</strong> ₹<span id="income">0</span></p>
-        <p><strong>Expense:</strong> ₹<span id="expense">0</span></p>
-        <p><strong>Profit:</strong> ₹<span id="profit">0</span></p>
-    </div>
+    <div class="button-group">
+        <a href="/add_transaction" class="action-button">➕ Add Transaction</a>
+        <a href="/add_expense" class="action-button">➕ Add Expense</a>
+        <a href="/filter_expenses" class="action-button">🔍 Filter Expenses</a>
+      </div>
 
-    <table>
-        <thead>
-        <tr><th>ID</th><th>Type</th><th>Qty</th><th>Amount</th><th>Txn</th><th>Method</th><th>Mode</th><th>Category</th><th>Time</th></tr>
-        </thead>
-        <tbody id="transactionTableBody"></tbody>
-    </table>
-</div>
-<script src="/static/script.js"></script>
+    <div id="greeting-message" class="greeting-message"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='home.js') }}"></script>
 </body>
 </html>
