@@ -4,9 +4,9 @@ from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
-# Database connection config
+# PostgreSQL DB config
 DB_CONFIG = {
-    'dbname': 'your_database_name',
+    'dbname': 'budget_db',
     'user': 'your_db_user',
     'password': 'root',
     'host': 'localhost',
@@ -29,22 +29,23 @@ def add_transaction():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO transactions 
-                (item, amount, transaction_type, payment_method, mode_of_transaction, date) 
-                VALUES (%s, %s, %s, %s, %s, %s)
+                (clothing_type, quantity, amount, transaction_type, payment_method, mode_of_transaction, category)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, (
-                data['item'],
+                data['clothing_type'],
+                int(data['quantity']),
                 float(data['amount']),
                 data['transaction_type'],
                 data['payment_method'],
                 data['mode_of_transaction'],
-                data['date']
+                data['category']
             ))
             conn.commit()
             cur.close()
             conn.close()
             return redirect(url_for('index'))
         except Exception as e:
-            return f"Error: {e}"
+            return f"Transaction Error: {e}"
     return render_template('add_transactions.html')
 
 @app.route('/add_expense', methods=['GET', 'POST'])
@@ -55,20 +56,19 @@ def add_expense():
             conn = get_db_connection()
             cur = conn.cursor()
             cur.execute("""
-                INSERT INTO expenses (category, amount, date, description)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO expenses (title, amount, category)
+                VALUES (%s, %s, %s)
             """, (
-                data['category'],
+                data['title'],
                 float(data['amount']),
-                data['date'],
-                data['description']
+                data['category']
             ))
             conn.commit()
             cur.close()
             conn.close()
             return redirect(url_for('index'))
         except Exception as e:
-            return f"Error: {e}"
+            return f"Expense Error: {e}"
     return render_template('add_expense.html')
 
 @app.route('/filter_expenses', methods=['GET', 'POST'])
@@ -79,7 +79,7 @@ def filter_expenses():
         end_date = request.form['end_date']
         category = request.form.get('category')
 
-        query = "SELECT * FROM expenses WHERE date BETWEEN %s AND %s"
+        query = "SELECT * FROM expenses WHERE timestamp BETWEEN %s AND %s"
         params = [start_date, end_date]
 
         if category:
@@ -94,7 +94,7 @@ def filter_expenses():
             cur.close()
             conn.close()
         except Exception as e:
-            return f"Error: {e}"
+            return f"Filtering Error: {e}"
 
     return render_template('filter_expense.html', expenses=filtered_data)
 

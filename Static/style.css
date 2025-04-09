@@ -6,6 +6,7 @@ body {
   color: #fff;
 }
 
+/* Container for forms and content */
 .container {
   max-width: 700px;
   margin: 80px auto;
@@ -28,6 +29,7 @@ h2 {
   color: #e0e0e0;
 }
 
+/* Form styling */
 form {
   display: flex;
   flex-direction: column;
@@ -45,6 +47,7 @@ input, select, textarea {
   box-sizing: border-box;
 }
 
+/* Primary button */
 button {
   padding: 12px 24px;
   font-size: 1rem;
@@ -82,17 +85,16 @@ button:hover {
   background-color: #019875;
 }
 
-
-/* Back to home button */
+/* Back to Home Button */
 .back-home-btn {
   display: inline-block;
   margin-top: 25px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background-color: #ff7675;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
   font-weight: bold;
+  border-radius: 10px;
   transition: background 0.3s ease, transform 0.2s;
 }
 
@@ -101,7 +103,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Expenses Table */
+/* Table styling for expenses/transactions */
 table {
   width: 100%;
   border-collapse: collapse;
